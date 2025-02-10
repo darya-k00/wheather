@@ -1,20 +1,18 @@
 import requests
-from urllib.parse import urlencode
 
 def get_weather(city):
     params = {
         'MnTq': '',
         'lang': 'ru'
     }
-    query_string = urlencode(params)
-    url = f'https://wttr.in/{city}?{query_string}'
-    response = requests.get(url)
-    response.raise_for_status()
+    url = f'https://wttr.in/{city}'
 
-    if response.status_code==200:
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
         return response.text
-    else:
-        print(f"{response.status_code}")
+    except requests.exceptions.RequestException as err:
+        return None
 
 if __name__ == "__main__":
     cities = ["аэропорт Шереметьево", "Лондон", "Череповец"]
