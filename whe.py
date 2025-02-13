@@ -12,12 +12,10 @@ def get_weather(city):
 
 def main():
     cities = ["аэропорт Шереметьево", "Лондон", "Череповец"]
-    try:
-        for city in cities:
-            weather_info = get_weather(city)
-            print(weather_info)
-    except requests.exceptions.RequestException as err:
-        return None
+
+    for city in cities:
+        weather_info = get_weather(city)
+        print(weather_info)
 
 if __name__ == "__main__":
     main()
